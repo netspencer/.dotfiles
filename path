@@ -1,0 +1,16 @@
+export PATH="/usr/local/sbin:$PATH";
+
+# Add `~/bin` to the `$PATH`
+export PATH="$HOME/bin:$PATH";
+
+# add python bin
+export PATH="$HOME/Library/Python/3.6/bin:$PATH";
+
+# Add usr/local/bin
+export PATH="/usr/local/git/bin:/usr/local/bin:$PATH";
+
+# Yarn
+export PATH="$PATH:`yarn global bin`";
+
+# Ruby
+export PATH="$HOME/.rbenv/bin:$PATH";
