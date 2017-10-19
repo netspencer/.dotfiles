@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Iterm
 # credit https://coderwall.com/p/s-2_nw/change-iterm2-color-profile-from-the-cli
 # add this to your shell profile
@@ -206,11 +208,11 @@ function getcertnames() {
 
 # `c` with no arguments opens the current directory in Atom Editor, otherwise
 # opens the given location
-function c() {
+function a() {
 	if [ $# -eq 0 ]; then
-		code .;
+		atom .;
 	else
-		code "$@";
+		atom "$@";
 	fi;
 }
 

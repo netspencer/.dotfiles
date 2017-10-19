@@ -16,6 +16,7 @@ brew 'cairo'
 brew 'libpng'
 brew 'jpeg'
 brew 'giflib'
+brew 'thefuck'
 
 # Install more recent versions of some OS X tools.
 tap 'homebrew/dupes'

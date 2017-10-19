@@ -1,0 +1,7 @@
+{
+  "_": "This is your Now config file. See `now config help`. More: https://git.io/v5ECz",
+  "updateChannel": "canary",
+  "sh": {
+    "desktop": {}
+  }
+}
