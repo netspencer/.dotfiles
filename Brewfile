@@ -17,6 +17,7 @@ brew 'libpng'
 brew 'jpeg'
 brew 'giflib'
 brew 'thefuck'
+brew 'tldr'
 
 # Install more recent versions of some OS X tools.
 tap 'homebrew/dupes'
@@ -34,6 +35,7 @@ brew 'sqlite'
 brew 'youtube-dl'
 brew 'python3'
 brew 'yarn' # also install Node.js
+brew 'nvm'
 brew 'go'
 brew 'rbenv'
 brew 'ruby-build'

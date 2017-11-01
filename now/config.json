@@ -2,6 +2,11 @@
   "_": "This is your Now config file. See `now config help`. More: https://git.io/v5ECz",
   "updateChannel": "canary",
   "sh": {
+    "user": {
+      "uid": "WeM8JMUoDhAhAcxNDeBRYs0G",
+      "email": "spencer@netspencer.com",
+      "username": "spencer"
+    },
     "desktop": {}
   }
 }
