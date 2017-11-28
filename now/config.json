@@ -7,6 +7,8 @@
       "email": "spencer@netspencer.com",
       "username": "spencer"
     },
-    "desktop": {}
+    "desktop": {
+      "updatedFrom": "3.4.3"
+    }
   }
 }
