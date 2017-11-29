@@ -208,6 +208,11 @@ function getcertnames() {
 
 # `c` with no arguments opens the current directory in Atom Editor, otherwise
 # opens the given location
+
+function code() {
+  VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
+}
+
 function a() {
 	if [ $# -eq 0 ]; then
 		atom .;
@@ -215,6 +220,15 @@ function a() {
 		atom "$@";
 	fi;
 }
+
+function c() {
+	if [ $# -eq 0 ]; then
+		code --args .;
+	else
+		code --args "$@";
+	fi;
+}
+
 
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location

@@ -117,11 +117,12 @@ module.exports = {
 	//   `@company/project`
 	//   `project#1.0.1`
 	plugins: [
-		'hyper-statusline',
-		'hyperterm-paste',
-		'hyperterm-tabs',
-		'hyperterm-atom-dark'
-	],
+        'hyper-statusline',
+        'hyperterm-paste',
+        'hyperterm-tabs',
+        'hyperterm-atom-dark',
+        "hyperlinks"
+    ],
 
 	// in development, you can create a directory under
 	// `~/.hyper_plugins/local/` and include it here
