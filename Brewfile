@@ -18,6 +18,7 @@ brew 'jpeg'
 brew 'giflib'
 brew 'thefuck'
 brew 'tldr'
+brew 'tag'
 
 # Install more recent versions of some OS X tools.
 tap 'homebrew/dupes'
