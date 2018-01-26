@@ -41,6 +41,11 @@ brew 'go'
 brew 'rbenv'
 brew 'ruby-build'
 
+# devops
+brew 'convox'
+brew 'kutectl'
+brew 'microkube'
+
 tap 'thoughtbot/formulae'
 brew 'rcm'
 

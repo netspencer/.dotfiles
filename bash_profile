@@ -39,6 +39,10 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+if [ -f ~/.kubectl-completion.bash ]; then
+  . ~/.yarn-completion.bash
+fi
+
 if [ -f ~/.yarn-completion.bash ]; then
   . ~/.yarn-completion.bash
 fi
