@@ -61,15 +61,8 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 eval "$(thefuck --alias)"
 
 # Ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-
-export RBENV_ROOT="$HOME/.rbenv"
-
-if [ -d $RBENV_ROOT ]; then
-  export PATH="$RBENV_ROOT/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"
