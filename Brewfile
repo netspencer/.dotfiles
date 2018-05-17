@@ -10,6 +10,7 @@ brew 'bash'
 brew 'bash-completion'
 brew 'git'
 brew 'git-lfs'
+brew 'git-flow'
 brew 'wget'
 brew 'pkg-config'
 brew 'cairo'
@@ -40,11 +41,10 @@ brew 'nvm'
 brew 'go'
 brew 'rbenv'
 brew 'ruby-build'
+brew 'docker' 
+brew 'docker-machine'
 
-# devops
-brew 'convox'
-brew 'kutectl'
-brew 'microkube'
+brew 'swiftgen'
 
 tap 'thoughtbot/formulae'
 brew 'rcm'
@@ -53,8 +53,8 @@ brew 'rcm'
 # Casks
 #----------------------------------------------------------------------------------------#
 
-cask 'google-chrome'
 cask 'firefox'
+cask 'sketch'
 
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'eclipse-java'
@@ -63,6 +63,9 @@ cask 'postgres'
 cask 'spotify'
 cask 'vlc'
 
+cask 'now'
+cask 'hyper'
 cask 'xquartz'
 cask 'atom'
+cask 'visual-studio-code'
 cask 'dropbox'
