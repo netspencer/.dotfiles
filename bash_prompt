@@ -117,6 +117,3 @@ PS1="\[\033]0;\W\007\]"; # working directory base name
 PS1+="\n";
 PS1+="\[${userStyle}${bold}\]λ \[${reset}\]"; # `$` (and reset color)
 export PS1;
-
-PS2="\[${yellow}\]→ \[${reset}\]";
-export PS2;

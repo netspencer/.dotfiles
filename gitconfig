@@ -135,6 +135,16 @@
 	# Use `hexdump` to diff binary files
 	textconv = hexdump -v -C
 
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+# If you want to set up Kaleidoscope as the default diff tool,
+# then also set the following variables:
+[difftool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+
 [help]
 
 	# Automatically correct and execute mistyped commands
@@ -144,6 +154,17 @@
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" \"$REMOTE\"
+
+# If you want to set up Kaleidoscope as the default merge tool,
+# then also set the following variables:
+[mergetool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
+
 
 [push]
 

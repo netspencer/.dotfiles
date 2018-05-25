@@ -5,10 +5,17 @@
     "user": {
       "uid": "WeM8JMUoDhAhAcxNDeBRYs0G",
       "email": "spencer@netspencer.com",
-      "username": "spencer"
+      "username": "spencer",
+      "date": null,
+      "avatar": null,
+      "github": false
     },
-    "desktop": {
-      "updatedFrom": "3.4.3"
+    "currentTeam": {
+      "id": "team_UNAYXRYSqWtY9DdbrmJvULVV",
+      "slug": "magma-media",
+      "name": "Magma Media",
+      "creatorId": "WeM8JMUoDhAhAcxNDeBRYs0G",
+      "avatar": "7a93e28368cfa93ba77f42a50ed6966b5aee6cd1"
     }
   }
 }
