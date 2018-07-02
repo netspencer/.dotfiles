@@ -6,8 +6,6 @@
       "uid": "WeM8JMUoDhAhAcxNDeBRYs0G",
       "email": "spencer@netspencer.com",
       "username": "spencer",
-      "date": null,
-      "avatar": null,
       "github": false
     },
     "currentTeam": {
@@ -16,6 +14,9 @@
       "name": "Magma Media",
       "creatorId": "WeM8JMUoDhAhAcxNDeBRYs0G",
       "avatar": "7a93e28368cfa93ba77f42a50ed6966b5aee6cd1"
+    },
+    "shownTips": {
+      "pasteFromClipboard": true
     }
   }
 }
