@@ -8,15 +8,23 @@
       "username": "spencer",
       "github": false
     },
+    "shownTips": {
+      "pasteFromClipboard": true
+    },
     "currentTeam": {
       "id": "team_UNAYXRYSqWtY9DdbrmJvULVV",
       "slug": "magma-media",
       "name": "Magma Media",
       "creatorId": "WeM8JMUoDhAhAcxNDeBRYs0G",
-      "avatar": "7a93e28368cfa93ba77f42a50ed6966b5aee6cd1"
-    },
-    "shownTips": {
-      "pasteFromClipboard": true
+      "avatar": "e76558599158d711443d357cfc75ccf52985ba01",
+      "github": {
+        "updatedAt": 1529977101662
+      },
+      "membership": {
+        "uid": "WeM8JMUoDhAhAcxNDeBRYs0G",
+        "role": "OWNER",
+        "created": 1521652640153
+      }
     }
   }
 }
