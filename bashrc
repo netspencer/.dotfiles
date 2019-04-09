@@ -16,3 +16,6 @@ export NVM_DIR="$HOME/.nvm"
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [ -f /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/electron-forge.bash ] && . /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/electron-forge.bash
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/slss.bash ] && . /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/slss.bash
