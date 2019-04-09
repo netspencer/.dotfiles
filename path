@@ -1,3 +1,5 @@
+#!/bin/sh
+
 export PATH="/usr/local/sbin:$PATH";
 
 # Add `~/bin` to the `$PATH`
@@ -16,5 +18,5 @@ export PATH="$PATH:`yarn global bin`";
 export PATH="$HOME/.rbenv/bin:$PATH";
 
 # Go
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
