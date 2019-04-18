@@ -1,30 +1,9 @@
 {
   "_": "This is your Now config file. See `now config help`. More: https://git.io/v5ECz",
   "updateChannel": "canary",
-  "sh": {
-    "user": {
-      "uid": "WeM8JMUoDhAhAcxNDeBRYs0G",
-      "email": "spencer@netspencer.com",
-      "username": "spencer",
-      "github": false
-    },
+  "desktop": {
     "shownTips": {
       "pasteFromClipboard": true
-    },
-    "currentTeam": {
-      "id": "team_UNAYXRYSqWtY9DdbrmJvULVV",
-      "slug": "magma-media",
-      "name": "Magma Media",
-      "creatorId": "WeM8JMUoDhAhAcxNDeBRYs0G",
-      "avatar": "e76558599158d711443d357cfc75ccf52985ba01",
-      "github": {
-        "updatedAt": 1529977101662
-      },
-      "membership": {
-        "uid": "WeM8JMUoDhAhAcxNDeBRYs0G",
-        "role": "OWNER",
-        "created": 1521652640153
-      }
     }
   }
 }
