@@ -53,8 +53,7 @@ brew 'rcm'
 # Casks
 #----------------------------------------------------------------------------------------#
 
-cask 'firefox'
-cask 'sketch'
+cask 'google-chrome'
 
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'eclipse-java'
@@ -66,6 +65,4 @@ cask 'vlc'
 cask 'now'
 cask 'hyper'
 cask 'xquartz'
-cask 'atom'
 cask 'visual-studio-code'
-cask 'dropbox'
