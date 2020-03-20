@@ -62,6 +62,8 @@ cask 'spotify'
 cask 'vlc'
 
 cask 'bartender'
+cask 'alfred'
+
 cask 'now'
 cask 'hyper'
 cask 'xquartz'
