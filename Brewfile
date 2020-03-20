@@ -22,11 +22,9 @@ brew 'tldr'
 brew 'tag'
 
 # Install more recent versions of some OS X tools.
-tap 'homebrew/dupes'
 brew 'grep'
 brew 'openssh'
 brew 'screen'
-brew 'vim', args: ['with-override-system-vi']
 brew 'emacs'
 brew 'tmux'
 brew 'z'
@@ -53,6 +51,7 @@ brew 'rcm'
 # Casks
 #----------------------------------------------------------------------------------------#
 
+cask 'slack'
 cask 'google-chrome'
 
 cask 'java' unless system '/usr/libexec/java_home --failfast'
@@ -62,6 +61,7 @@ cask 'postgres'
 cask 'spotify'
 cask 'vlc'
 
+cask 'bartender'
 cask 'now'
 cask 'hyper'
 cask 'xquartz'
