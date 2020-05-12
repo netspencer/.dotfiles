@@ -20,6 +20,7 @@ brew 'giflib'
 brew 'thefuck'
 brew 'tldr'
 brew 'tag'
+brew 'starship'
 
 # Install more recent versions of some OS X tools.
 tap 'homebrew/dupes'
