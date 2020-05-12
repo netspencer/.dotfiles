@@ -23,11 +23,9 @@ brew 'tag'
 brew 'starship'
 
 # Install more recent versions of some OS X tools.
-tap 'homebrew/dupes'
 brew 'grep'
 brew 'openssh'
 brew 'screen'
-brew 'vim', args: ['with-override-system-vi']
 brew 'emacs'
 brew 'tmux'
 brew 'z'
@@ -54,8 +52,8 @@ brew 'rcm'
 # Casks
 #----------------------------------------------------------------------------------------#
 
-cask 'firefox'
-cask 'sketch'
+cask 'slack'
+cask 'google-chrome'
 
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'eclipse-java'
@@ -64,9 +62,10 @@ cask 'postgres'
 cask 'spotify'
 cask 'vlc'
 
+cask 'bartender'
+cask 'alfred'
+
 cask 'now'
 cask 'hyper'
 cask 'xquartz'
-cask 'atom'
 cask 'visual-studio-code'
-cask 'dropbox'
