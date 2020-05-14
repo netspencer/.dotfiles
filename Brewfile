@@ -21,6 +21,8 @@ brew 'thefuck'
 brew 'tldr'
 brew 'tag'
 
+brew 'bat'
+
 # Install more recent versions of some OS X tools.
 brew 'grep'
 brew 'openssh'
@@ -35,6 +37,7 @@ brew 'sqlite'
 brew 'youtube-dl'
 brew 'python3'
 brew 'yarn' # also install Node.js
+brew 'deno'
 brew 'nvm'
 brew 'go'
 brew 'rbenv'
