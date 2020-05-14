@@ -20,6 +20,7 @@ brew 'giflib'
 brew 'thefuck'
 brew 'tldr'
 brew 'tag'
+brew 'starship'
 
 brew 'bat'
 
