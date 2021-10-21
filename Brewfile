@@ -47,6 +47,7 @@ brew 'docker'
 brew 'docker-machine'
 
 brew 'swiftgen'
+brew 'swiftformat'
 
 tap 'thoughtbot/formulae'
 brew 'rcm'
