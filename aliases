@@ -260,6 +260,7 @@ alias gmu='git fetch origin -v; git fetch upstream -v; git merge upstream/master
 
 # Tuist
 alias tgo='tuist generate --open'
+alias tdf='tuist dependencies fetch'
 
 # Tmux
 alias tls='tmux list-session'
