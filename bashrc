@@ -18,3 +18,4 @@ export NVM_DIR="$HOME/.nvm"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/slss.bash ] && . /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/slss.bash
+eval "$(thefuck --alias)"

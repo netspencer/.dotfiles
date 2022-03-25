@@ -24,6 +24,8 @@ for option in autocd globstar; do
 	shopt -s "$option" 2> /dev/null;
 done;
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Move next only if `homebrew` is installed
 if command -v brew >/dev/null 2>&1; then
     # Load rupa's z if installed
