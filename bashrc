@@ -19,3 +19,5 @@ export NVM_DIR="$HOME/.nvm"
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/slss.bash ] && . /Users/spencer/.config/yarn/global/node_modules/tabtab/.completions/slss.bash
 eval "$(thefuck --alias)"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
