@@ -45,6 +45,7 @@ brew 'rbenv'
 brew 'ruby-build'
 brew 'docker' 
 brew 'docker-machine'
+brew 'vapor'
 
 brew 'swiftgen'
 brew 'swiftformat'
