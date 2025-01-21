@@ -3,7 +3,7 @@
 # Brew
 export COLUMNS
 
-# Make vim the default editor.
+# Make vscode the default editor.
 export EDITOR='code';
 
 # Enable persistent REPL history for `node`.

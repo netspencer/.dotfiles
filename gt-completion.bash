@@ -2,8 +2,8 @@
 #
 # yargs command completion script
 #
-# Installation: /opt/homebrew/bin/gt completion >> ~/.bashrc
-#    or /opt/homebrew/bin/gt completion >> ~/.bash_profile on OSX.
+# Installation: /opt/homebrew/Cellar/graphite/0.20.22/bin/gt completion >> ~/.bashrc
+#    or /opt/homebrew/Cellar/graphite/0.20.22/bin/gt completion >> ~/.bash_profile on OSX.
 #
 _gt_yargs_completions()
 {
@@ -13,7 +13,7 @@ _gt_yargs_completions()
     args=("${COMP_WORDS[@]}")
 
     # ask yargs to generate completions.
-    type_list=$(/opt/homebrew/bin/gt --get-yargs-completions "${args[@]}")
+    type_list=$(/opt/homebrew/Cellar/graphite/0.20.22/bin/gt --get-yargs-completions "${args[@]}")
 
     COMPREPLY=( $(compgen -W "${type_list}" -- ${cur_word}) )
 
