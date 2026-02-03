@@ -84,7 +84,8 @@ ff() {
 }
 
 # Find directory by name
-fd() {
+# Named fdir to avoid conflict with fd command
+fdir() {
   find . -type d -iname "*$1*"
 }
 

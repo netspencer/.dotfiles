@@ -54,14 +54,22 @@ alias reload="exec $SHELL -l"
 alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'Copied to clipboard'"
 
 # ─────────────────────────────────────────────────────────────
-# Modern replacements (uncomment if you install these)
+# Modern replacements (auto-enabled when tools are installed)
 # ─────────────────────────────────────────────────────────────
-# alias cat="bat"           # brew install bat
-# alias ls="eza"            # brew install eza
-# alias find="fd"           # brew install fd
-# alias grep="rg"           # brew install ripgrep
-# alias top="btop"          # brew install btop
-# alias du="dust"           # brew install dust
+command -v bat >/dev/null && alias cat="bat --paging=never"
+
+if command -v eza >/dev/null; then
+  alias ls="eza"
+  alias ll="eza -la --git"
+  alias la="eza -a"
+  alias l="eza -F"
+  alias tree="eza --tree"
+fi
+
+command -v fd >/dev/null && alias find="fd"
+command -v rg >/dev/null && alias grep="rg"
+command -v btop >/dev/null && alias top="btop"
+command -v dust >/dev/null && alias du="dust"
 
 # ─────────────────────────────────────────────────────────────
 # Python
