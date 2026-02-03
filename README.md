@@ -8,7 +8,7 @@ A minimal, intentional shell configuration using [Nushell](https://www.nushell.s
 
 **Fail gracefully.** Every tool is guarded. Missing `eza`? You get standard `ls`. Missing `bat`? You get `cat`. The config works on a fresh Mac or a fully-loaded dev machine.
 
-**Stay fast.** Shell startup should be imperceptible. These dotfiles load in under 200ms thanks to cached tool initialization.
+**Stay fast.** Shell startup should be imperceptible (~10ms) thanks to cached tool initialization.
 
 ## Why Nushell?
 
@@ -42,8 +42,22 @@ A minimal, intentional shell configuration using [Nushell](https://www.nushell.s
 git clone https://github.com/YOU/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./setup.sh
-nu  # or: chsh -s $(which nu)
+chsh -s $(which nu)
 ```
+
+The setup script handles both macOS and Linux, creating symlinks in the correct location:
+- **macOS**: `~/Library/Application Support/nushell/`
+- **Linux**: `~/.config/nushell/`
+
+### Terminal Setup (Ghostty)
+
+If using [Ghostty](https://ghostty.org/), add to `~/.config/ghostty/config`:
+
+```
+command = /opt/homebrew/bin/nu --login
+```
+
+The `--login` flag ensures `env.nu` is sourced properly.
 
 ## The Tools
 
@@ -106,18 +120,20 @@ grep        # rg
 ## Functions
 
 ```nu
-mkd foo     # mkdir foo && cd foo
-extract x   # Extract any archive format
-serve       # Python HTTP server in current directory
-z foo       # Jump to most-used directory matching "foo"
-zi          # Interactive directory picker
-ff foo      # Find files matching "foo"
-fdir foo    # Find directories matching "foo"
-activate    # Activate Python venv (nushell-native)
-deactivate  # Deactivate Python venv
-weather     # Show weather
-cheat topic # Cheatsheet for any topic
-ai "query"  # Generate bash command from natural language
+mkd foo      # mkdir foo && cd foo
+extract x    # Extract any archive format
+serve        # Python HTTP server in current directory
+z foo        # Jump to most-used directory matching "foo"
+zi           # Interactive directory picker
+ff foo       # Find files matching "foo"
+fdir foo     # Find directories matching "foo"
+activate     # Activate Python venv (nushell-native)
+deactivate   # Deactivate Python venv
+flushdns     # Flush macOS DNS cache
+weather      # Show weather
+cheat topic  # Cheatsheet for any topic
+ai "query"   # Generate bash command from natural language
+ssm <name>   # AWS SSM Session Manager shortcuts
 ```
 
 ## Python Virtual Environments
@@ -136,15 +152,21 @@ deactivate            # Deactivate
 
 1. Create `tools/mytool.nu`
 2. Guard it: `if (which mytool | is-empty) { return }`
-3. It auto-loads on next shell
+3. Add `source ~/.dotfiles/tools/mytool.nu` to `config.nu`
+
+> **Note:** Nushell's `source` requires parse-time constant paths, so tools can't be auto-discovered with glob patterns. Each tool file must be explicitly listed in `config.nu`.
 
 ### Adding aliases
 
 Edit `aliases.nu` for static aliases, or `config.nu` for conditional ones (that check if a tool exists).
 
+**Gotchas:**
+- Use `^command` to call external commands (e.g., `^open` for macOS open vs nushell's `open`)
+- Can't use `;` in aliases—use a function instead for multi-command sequences
+
 ### Adding completions
 
-Drop a `.nu` file in `completions/`. It auto-loads.
+Create a `.nu` file in `completions/` and add a source line to `config.nu`.
 
 ## Debugging
 
@@ -153,24 +175,31 @@ Drop a `.nu` file in `completions/`. It auto-loads.
 timeit { nu -c "exit" }
 
 # Check environment
-$env.PATH | where { $in =~ "homebrew" }
+$env.PATH | to text
 
-# Regenerate tool caches
+# Check if a tool is in PATH
+which claude
+
+# Regenerate tool caches (starship, zoxide, mise)
 ~/.dotfiles/setup.sh
+
+# Test config for errors
+nu -c 'source ~/.dotfiles/config.nu'
 ```
 
-## Migration from zsh
+## Nushell Quirks
 
-Key differences from the old zsh config:
+Things that work differently from bash/zsh:
 
-| zsh | nushell |
-|-----|---------|
+| bash/zsh | nushell |
+|----------|---------|
 | `export VAR=val` | `$env.VAR = val` |
 | `alias name="cmd"` | `alias name = cmd` |
+| `alias foo="a; b"` | Use a function (`;` runs at parse time) |
+| `open file.txt` | `^open file.txt` (prefix `^` for external commands) |
 | `source .venv/bin/activate` | `activate` function |
-| `print -z "$cmd"` | Not available (simplified ai function) |
-| fzf Ctrl-R/T/C | Built-in fuzzy completion |
-| zsh plugins | Built-in features |
+| `$HOME/path` | `($env.HOME \| path join "path")` or `~/path` |
+| Dynamic source paths | Must be parse-time constants (use `~` not `$env.HOME`) |
 
 ## Principles
 
