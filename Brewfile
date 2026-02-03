@@ -1,6 +1,9 @@
-# Shell plugins
-brew "zsh-autosuggestions"
-brew "zsh-syntax-highlighting"
+# Shell
+brew "nushell"       # Modern shell with structured data
+brew "starship"      # Prompt (works with nushell)
+
+# Version management
+brew "mise"          # Multi-language version manager (replaces pyenv)
 
 # Modern CLI tools
 brew "bat"           # cat replacement

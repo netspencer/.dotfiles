@@ -1,5 +1,4 @@
-#!/usr/bin/env zsh
-# ~/.dotfiles/tools/delta.zsh
+# ~/.dotfiles/tools/delta.nu
 # Better git diffs with delta
 #
 # Requires one-time git config (run setup.sh or manually):
@@ -11,14 +10,10 @@
 #
 # Once configured, all git diff/log/show commands use delta automatically.
 
-command -v delta >/dev/null || return
+# Guard: only load if delta is installed
+if (which delta | is-empty) { return }
 
 # Aliases for common diff operations
-alias gdd="git diff"           # delta makes this side-by-side
-alias gdds="git diff --staged" # staged changes
-alias gdw="git diff --word-diff=color"  # word-level diff
-
-# Show diff with specific file
-gdf() {
-  git diff "$@"
-}
+alias gdd = git diff            # delta makes this side-by-side
+alias gdds = git diff --staged  # staged changes
+alias gdw = git diff --word-diff=color  # word-level diff

@@ -1,95 +1,66 @@
-#!/usr/bin/env zsh
-# ~/.dotfiles/aliases.zsh
-# Keep it tight. If it needs logic, it's a function.
+# ~/.dotfiles/env.nu
+# All PATH and environment setup lives here
+# This file is sourced before config.nu
 
 # ─────────────────────────────────────────────────────────────
-# Navigation
+# Dotfiles location
 # ─────────────────────────────────────────────────────────────
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-
-alias d="cd ~/Developer/delphi/delphi"
-alias dv="cd ~/Developer"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias dot="cd ~/.dotfiles"
+$env.DOTFILES = ($env.HOME | path join ".dotfiles")
 
 # ─────────────────────────────────────────────────────────────
-# Files & Directories
+# Homebrew (Apple Silicon or Intel)
 # ─────────────────────────────────────────────────────────────
-alias ls="ls -G"
-alias ll="ls -lah"
-alias la="ls -a"
-alias l="ls -F"
+$env.HOMEBREW_PREFIX = if ("/opt/homebrew" | path exists) {
+    "/opt/homebrew"
+} else {
+    "/usr/local"
+}
 
-alias md="mkdir -p"
-alias rd="rmdir"
-
-# ─────────────────────────────────────────────────────────────
-# Git (the essentials)
-# ─────────────────────────────────────────────────────────────
-alias g="git"
-alias gs="git status"
-alias gd="git diff"
-alias gds="git diff --staged"
-alias ga="git add"
-alias gc="git commit"
-alias gcm="git commit -m"
-alias gp="git push"
-alias gl="git pull"
-alias gco="git checkout"
-alias gb="git branch"
-alias glog="git log --oneline --graph -20"
+$env.PATH = ($env.PATH | prepend [
+    ($env.HOMEBREW_PREFIX | path join "bin")
+    ($env.HOMEBREW_PREFIX | path join "sbin")
+])
 
 # ─────────────────────────────────────────────────────────────
-# Quick actions
+# Local binaries
 # ─────────────────────────────────────────────────────────────
-alias c="clear"
-alias q="exit"
-alias h="history"
-alias reload="exec $SHELL -l"
-
-# Copy pwd to clipboard
-alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'Copied to clipboard'"
+$env.PATH = ($env.PATH | prepend ($env.HOME | path join ".local/bin"))
 
 # ─────────────────────────────────────────────────────────────
-# Modern replacements (auto-enabled when tools are installed)
+# Node / JS
 # ─────────────────────────────────────────────────────────────
-command -v bat >/dev/null && alias cat="bat --paging=never"
+# pnpm
+$env.PNPM_HOME = ($env.HOME | path join "Library/pnpm")
+if ($env.PNPM_HOME | path exists) {
+    $env.PATH = ($env.PATH | prepend $env.PNPM_HOME)
+}
 
-if command -v eza >/dev/null; then
-  alias ls="eza"
-  alias ll="eza -la --git"
-  alias la="eza -a"
-  alias l="eza -F"
-  alias tree="eza --tree"
-fi
-
-command -v fd >/dev/null && alias find="fd"
-command -v rg >/dev/null && alias grep="rg"
-command -v btop >/dev/null && alias top="btop"
-command -v dust >/dev/null && alias du="dust"
+# bun
+$env.BUN_INSTALL = ($env.HOME | path join ".bun")
+if ($env.BUN_INSTALL | path exists) {
+    $env.PATH = ($env.PATH | prepend ($env.BUN_INSTALL | path join "bin"))
+}
 
 # ─────────────────────────────────────────────────────────────
-# Python
+# Databases
 # ─────────────────────────────────────────────────────────────
-alias python="python3"
-alias pip="pip3"
-alias venv="python3 -m venv"
-alias activate="source .venv/bin/activate"
+let pg_path = "/opt/homebrew/opt/postgresql@15/bin"
+if ($pg_path | path exists) {
+    $env.PATH = ($env.PATH | prepend $pg_path)
+}
 
 # ─────────────────────────────────────────────────────────────
-# macOS
+# Version managers (mise)
 # ─────────────────────────────────────────────────────────────
-alias finder="open -a Finder ."
-alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-alias flushdns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+# mise replaces pyenv - use cached init for fast startup
+# Run setup.sh to regenerate: mise activate nu > ~/.cache/mise.nu
+let mise_cache = ($env.HOME | path join ".cache/mise.nu")
+if ($mise_cache | path exists) {
+    source ~/.cache/mise.nu
+}
 
 # ─────────────────────────────────────────────────────────────
-# Network
+# Editor
 # ─────────────────────────────────────────────────────────────
-alias ip="curl -s ifconfig.me"
-alias localip="ipconfig getifaddr en0"
-alias ports="lsof -iTCP -sTCP:LISTEN -P"
+$env.EDITOR = "vim"
+$env.VISUAL = "vim"

@@ -1,31 +1,36 @@
 # dotfiles
 
-A minimal, intentional shell configuration. Fast startup. No magic. Every line earns its place.
+A minimal, intentional shell configuration using [Nushell](https://www.nushell.sh/). Fast startup. No magic. Every line earns its place.
 
 ## Philosophy
 
-**Do one thing well.** These dotfiles follow the Unix philosophy: small, composable tools that work together. No frameworks. No plugin managers. Just shell scripts that source other shell scripts.
+**Do one thing well.** These dotfiles follow the Unix philosophy: small, composable tools that work together. No frameworks. No plugin managers. Just nushell scripts that source other scripts.
 
 **Fail gracefully.** Every tool is guarded. Missing `eza`? You get standard `ls`. Missing `bat`? You get `cat`. The config works on a fresh Mac or a fully-loaded dev machine.
 
-**Stay fast.** Shell startup should be imperceptible. These dotfiles load in under 200ms, even with all tools installed.
+**Stay fast.** Shell startup should be imperceptible. These dotfiles load in under 200ms thanks to cached tool initialization.
+
+## Why Nushell?
+
+- **Structured data** - Pipelines work with tables, not text. No more `awk '{print $2}'`.
+- **Built-in features** - Autosuggestions, syntax highlighting, fuzzy completion. No plugins needed.
+- **Better scripting** - Real types, proper error handling, match expressions.
+- **Fast startup** - Cached tool initialization means instant shell.
 
 ## Structure
 
 ```
 ~/.dotfiles/
-├── init.zsh          # Entry point - sources everything in order
-├── path.zsh          # PATH and environment variables
-├── aliases.zsh       # Short commands (guarded for modern tools)
-├── functions.zsh     # Reusable shell functions
-├── plugins.zsh       # zsh-autosuggestions + syntax-highlighting
-├── prompt.zsh        # Starship prompt
+├── env.nu            # PATH and environment variables
+├── config.nu         # Entry point - sources everything, shell settings
+├── aliases.nu        # Short commands (guarded for modern tools)
+├── functions.nu      # Reusable shell functions
 ├── tools/
-│   ├── fzf.zsh       # Fuzzy finder
-│   ├── zoxide.zsh    # Smart directory jumping
-│   ├── direnv.zsh    # Per-directory environments
-│   ├── delta.zsh     # Better git diffs
-│   └── ssm.zsh       # AWS Session Manager shortcuts
+│   ├── fzf.nu        # Fuzzy finder config
+│   ├── zoxide.nu     # Smart directory jumping
+│   ├── direnv.nu     # Per-directory environments
+│   ├── delta.nu      # Better git diffs
+│   └── ssm.nu        # AWS Session Manager shortcuts
 ├── completions/      # Custom tab completions
 ├── Brewfile          # Homebrew dependencies
 └── setup.sh          # Bootstrap for fresh machines
@@ -37,7 +42,7 @@ A minimal, intentional shell configuration. Fast startup. No magic. Every line e
 git clone https://github.com/YOU/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ./setup.sh
-exec zsh
+nu  # or: chsh -s $(which nu)
 ```
 
 ## The Tools
@@ -52,18 +57,7 @@ Modern replacements for classic Unix commands. Each one respects the spirit of t
 | `grep` | [ripgrep](https://github.com/BurntSushi/ripgrep) | Faster, respects `.gitignore`, better UX |
 | `cd` | [zoxide](https://github.com/ajeetdsouza/zoxide) | Learns your habits, jump anywhere with `z foo` |
 | `diff` | [delta](https://github.com/dandavison/delta) | Side-by-side, syntax highlighting, word-level diffs |
-
-### Fuzzy Finding (fzf)
-
-[fzf](https://github.com/junegunn/fzf) is the glue. It turns any list into an interactive filter.
-
-| Keybinding | Action |
-|------------|--------|
-| `Ctrl-R` | Search command history |
-| `Ctrl-T` | Find files, insert path |
-| `Alt-C` | Find directories, cd into selection |
-
-The config uses `fd` for file listing (fast, ignores `.git` and `node_modules`) and `bat`/`eza` for previews.
+| `pyenv` | [mise](https://mise.jdx.dev/) | Multi-language version manager with native nushell support |
 
 ### Environment Management (direnv)
 
@@ -75,33 +69,25 @@ echo 'export DATABASE_URL="postgres://..."' > .envrc
 direnv allow
 ```
 
-Variables load automatically when you `cd` in, unload when you leave. No more "forgot to source `.env`".
+Variables load automatically when you `cd` in, unload when you leave.
 
-### Zsh Plugins
+## Built-in Features
 
-Two plugins, loaded in the correct order:
+Nushell includes what zsh needed plugins for:
 
-1. **zsh-autosuggestions** - Ghost text from your history as you type
-2. **zsh-syntax-highlighting** - Commands turn green when valid, red when not
-
-No plugin manager. They're sourced directly from Homebrew's install location.
-
-## Key Bindings
-
-| Key | Action |
-|-----|--------|
-| `Ctrl-R` | Fuzzy search history |
-| `Ctrl-T` | Fuzzy find files |
-| `Alt-C` | Fuzzy cd to directory |
-| `→` | Accept autosuggestion |
+| Feature | Nushell | zsh |
+|---------|---------|-----|
+| Autosuggestions | Built-in | zsh-autosuggestions plugin |
+| Syntax highlighting | Built-in | zsh-syntax-highlighting plugin |
+| Fuzzy completion | `completions.algorithm: "fuzzy"` | fzf integration |
+| Structured history | SQLite-backed | text file |
 
 ## Aliases
 
 ```bash
 # Navigation
-..          # cd ..
-...         # cd ../..
 d           # cd ~/Developer/delphi/delphi
+dot         # cd ~/.dotfiles
 
 # Git
 gs          # git status
@@ -119,66 +105,84 @@ grep        # rg
 
 ## Functions
 
-```bash
-mkd foo     # mkdir -p foo && cd foo
+```nu
+mkd foo     # mkdir foo && cd foo
 extract x   # Extract any archive format
 serve       # Python HTTP server in current directory
 z foo       # Jump to most-used directory matching "foo"
 zi          # Interactive directory picker
-fdir foo    # Find directories matching "foo"
 ff foo      # Find files matching "foo"
+fdir foo    # Find directories matching "foo"
+activate    # Activate Python venv (nushell-native)
+deactivate  # Deactivate Python venv
+weather     # Show weather
+cheat topic # Cheatsheet for any topic
+ai "query"  # Generate bash command from natural language
+```
+
+## Python Virtual Environments
+
+Unlike bash/zsh, nushell can't `source .venv/bin/activate` (that's a bash script). Instead, use the built-in functions:
+
+```nu
+python -m venv .venv  # Create venv
+activate              # Activate it (or: activate .venv)
+deactivate            # Deactivate
 ```
 
 ## Customization
 
 ### Adding a new tool
 
-1. Create `tools/mytool.zsh`
-2. Guard it: `command -v mytool >/dev/null || return`
+1. Create `tools/mytool.nu`
+2. Guard it: `if (which mytool | is-empty) { return }`
 3. It auto-loads on next shell
 
 ### Adding aliases
 
-Edit `aliases.zsh`. Keep it simple. If it needs logic, make it a function.
+Edit `aliases.nu` for static aliases, or `config.nu` for conditional ones (that check if a tool exists).
 
 ### Adding completions
 
-Drop a `.zsh` file in `completions/`. It auto-loads.
-
-## Principles
-
-1. **Explicit over implicit.** No "magic" loading. Read `init.zsh` to see exactly what runs.
-
-2. **Guard everything.** `command -v foo >/dev/null &&` before any tool-specific config.
-
-3. **One file, one purpose.** Path config in `path.zsh`. Aliases in `aliases.zsh`. No mixing.
-
-4. **Comments explain why, not what.** The code shows what. Comments explain the non-obvious.
-
-5. **Optimize for reading.** You write this once. You read it every time something breaks.
+Drop a `.nu` file in `completions/`. It auto-loads.
 
 ## Debugging
 
-```bash
+```nu
 # Check startup time
-time zsh -i -c exit
+timeit { nu -c "exit" }
 
-# See what's slow (if anything)
-zsh -xv 2>&1 | ts -i "%.s" | head -100
+# Check environment
+$env.PATH | where { $in =~ "homebrew" }
 
-# Test a clean load
-env -i HOME=$HOME zsh -l
+# Regenerate tool caches
+~/.dotfiles/setup.sh
 ```
 
-## Credits
+## Migration from zsh
 
-Standing on the shoulders of giants. These dotfiles are a synthesis of patterns from:
+Key differences from the old zsh config:
 
-- [Mathias Bynens](https://github.com/mathiasbynens/dotfiles)
-- [Zach Holman](https://github.com/holman/dotfiles)
-- [Paul Irish](https://github.com/paulirish/dotfiles)
+| zsh | nushell |
+|-----|---------|
+| `export VAR=val` | `$env.VAR = val` |
+| `alias name="cmd"` | `alias name = cmd` |
+| `source .venv/bin/activate` | `activate` function |
+| `print -z "$cmd"` | Not available (simplified ai function) |
+| fzf Ctrl-R/T/C | Built-in fuzzy completion |
+| zsh plugins | Built-in features |
 
-And countless hours reading `man` pages.
+## Principles
+
+1. **Explicit over implicit.** Read `config.nu` to see exactly what runs.
+
+2. **Guard everything.** `if (which foo | is-empty) { return }` before tool-specific config.
+
+3. **One file, one purpose.** Environment in `env.nu`. Aliases in `aliases.nu`. No mixing.
+
+4. **Cache for speed.** Tool init scripts are pre-generated, not run on every shell start.
+
+5. **Optimize for reading.** You write this once. You read it every time something breaks.
 
 ---
 
